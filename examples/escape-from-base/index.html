@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Escape from base</title>
+    <script src="/page.js"></script>
+    <base href="/escape-from-base/">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="foo">foo</a></li>
+        <li><a href="bar">bar</a></li>
+        <li><a href="http://localhost:4000/external/escape-from-base/foo">external foo</a></li>
+      </ul>
+    </nav>
+
+    <main></main>
+
+    <script>
+      var render = function(content){
+        document.querySelector("main").innerHTML = content;
+      }
+      page("/", function(){
+        render("home content")
+      })
+      page("/foo", function(){
+        render("foo content")
+      })
+      page("/bar", function(){
+        render("bar content")
+      })
+      page("*", function(){
+        render("404 Not found")
+      })
+      page.base("/escape-from-base")
+      page.start()
+    </script>
+  </body>
+</html>
